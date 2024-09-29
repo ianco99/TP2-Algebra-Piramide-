@@ -24,7 +24,7 @@ void main()
 
     SetTargetFPS(60);  
 
-    Vector3 v = { GetRandomValue(0,5),GetRandomValue(0,5), GetRandomValue(0,5)};
+    Vector3 v = { GetRandomValue(1,5),GetRandomValue(0,5), GetRandomValue(0,5)};
 
     std::vector<block> pyramid;
 
@@ -34,7 +34,7 @@ void main()
 
     std::cin >> n;
 
-    block Block;
+    block Block;                                                        // creo el primer bloque 
     Block.start = { 0,0,0 };
     Block.A = CreateVectorA(Block.start, v);
     Block.B = CreateTemporalVectorB(Block.A, Block.start);
@@ -52,11 +52,11 @@ void main()
     cube.start = { 0,0,0 };
     cube.C = Block.C;
     cube.A = { (Block.A.x / mag) * magC, (Block.A.y / mag) * magC, (Block.A.z / mag) * magC };
-    cube.B = { (Block.B.x / mag) * magC, (Block.B.y / mag) * magC, (Block.B.z / mag) * magC };
+    cube.B = { (Block.B.x / mag) * magC, (Block.B.y / mag) * magC, (Block.B.z / mag) * magC };          //cubo que uso para determinar el lugar donde empieza el proximo bloque
 
     int i = 0;
 
-    while (newMag > magC * 2)
+    while (newMag > magC * 2)           // creo los bloques
     { 
         mag = GetMag(pyramid[i].start, pyramid[i].A);
         newMag = mag - (magC * 2);
@@ -77,7 +77,12 @@ void main()
         Block.C.y = pyramid[i].C.y + Block.start.y - pyramid[i].start.y;
         Block.C.z = pyramid[i].C.z + Block.start.z - pyramid[i].start.z;
 
-        pyramid.push_back(Block);
+        if (newMag >= magC * 2)          //solo agrega al vector si cumple con la medida 
+        {
+            pyramid.push_back(Block);
+        }
+        
+
         i++;
     }
 
@@ -113,7 +118,7 @@ void main()
 
         DrawGrid(10, 1.0f);
 
-        for (int i = 0; i < pyramid.size(); i++)
+        for (int i = 0; i < pyramid.size(); i++)        //dibujado
         {
             drawBlock(pyramid[i].A, pyramid[i].B, pyramid[i].C, pyramid[i].start);
         }

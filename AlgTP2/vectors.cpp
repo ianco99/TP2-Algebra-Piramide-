@@ -80,8 +80,6 @@ Vector3 CreateVectorB(Vector3& vectorA, Vector3& vectorC, Vector3 start)
 Vector3 moveStart(block cube, Vector3 oldStart)
 {
     cube.start = oldStart;
-    
-
 
     Vector3 newBlockStart;
 
