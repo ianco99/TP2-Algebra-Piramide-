@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+
 void main()
 {
     const int screenWidth = 800;
@@ -27,11 +28,17 @@ void main()
 
     std::vector<block> pyramid;
 
+    int n = 0;
+
+    std::cout << "por cuanto queres dividir C? :";
+
+    std::cin >> n;
+
     block Block;
     Block.start = { 0,0,0 };
     Block.A = CreateVectorA(Block.start, v);
     Block.B = CreateTemporalVectorB(Block.A, Block.start);
-    Block.C = CreateVectorC(Block.A, Block.B, 10, Block.start);
+    Block.C = CreateVectorC(Block.A, Block.B, n, Block.start);
     Block.B = CreateVectorB(Block.A, Block.C, Block.start);
 
     pyramid.push_back(Block);
